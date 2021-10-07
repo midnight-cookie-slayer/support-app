@@ -1,10 +1,18 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
+
+from rest_framework.viewsets import ModelViewSet
+from .serializers import UserSerializer
+
 from .models import User
 from .models import Support
 
 
-############################################################################
+class UserViewSet(ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+"""
+############################################################################           остатки от работы с фронтом
 def index(request):
     users = User.objects.all()
     supports = Support.objects.all()
@@ -45,4 +53,4 @@ def create_support(request):
             user.is_frozen = request.POST.get("is_frozen")
         user.save()
         support.save()
-    return HttpResponseRedirect("/")
+    return HttpResponseRedirect("/")"""
