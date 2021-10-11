@@ -12,7 +12,7 @@ class UserSerializer(ModelSerializer):
 class UserISUpdateSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = ('name', 'is_done', 'is_frozen')
+        fields = ('id', 'name', 'message', 'is_done', 'is_frozen')
 
 
 class SupportSerializer(ModelSerializer):

@@ -28,6 +28,12 @@ class UserViewSet(ModelViewSet):
     serializer_class = UserSerializer
 
 
+class UserViewUpdate(RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+
 class UserViewISUpdate(RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserISUpdateSerializer
