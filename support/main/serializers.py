@@ -6,7 +6,13 @@ from main.models import User, Support
 class UserSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = ('name', 'message')
+        fields = ('id', 'name', 'message')
+
+
+class UserISUpdateSerializer(ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('name', 'is_done', 'is_frozen')
 
 
 class SupportSerializer(ModelSerializer):

@@ -1,26 +1,48 @@
-from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+"""from django.shortcuts import render                       # остатки фронта
+from django.http import HttpResponse, HttpResponseRedirect"""
 
-from rest_framework.generics import CreateAPIView
+from rest_framework.generics import CreateAPIView, RetrieveUpdateDestroyAPIView, ListAPIView
 from rest_framework.viewsets import ModelViewSet
 
-from .serializers import UserSerializer, SupportSerializer
+from .serializers import UserSerializer, UserISUpdateSerializer, SupportSerializer
 
-from .models import User
-from .models import Support
+from .models import User, Support
 
 
-class UserCreateView(CreateAPIView):
+# Для чего это нужно ищите в комментариях support/urls.py . Туда я привязывал все эти классы.
+
+# Users:
+
+
+class UserViewList(ListAPIView):
+    queryset = User.objects.all()
     serializer_class = UserSerializer
 
 
-class SupportCreateView(CreateAPIView):
-    serializer_class = SupportSerializer
+class UserViewCreate(CreateAPIView):
+    serializer_class = UserSerializer
 
 
 class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+
+class UserViewISUpdate(RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserISUpdateSerializer
+
+
+# Supports:
+
+
+class SupportViewList(ListAPIView):
+    queryset = Support.objects.all()
+    serializer_class = SupportSerializer
+
+
+class SupportViewCreate(CreateAPIView):
+    serializer_class = SupportSerializer
 
 
 class SupportViewSet(ModelViewSet):
