@@ -1,16 +1,31 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 
+from rest_framework.generics import CreateAPIView
 from rest_framework.viewsets import ModelViewSet
-from .serializers import UserSerializer
+
+from .serializers import UserSerializer, SupportSerializer
 
 from .models import User
 from .models import Support
 
 
+class UserCreateView(CreateAPIView):
+    serializer_class = UserSerializer
+
+
+class SupportCreateView(CreateAPIView):
+    serializer_class = SupportSerializer
+
+
 class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+
+class SupportViewSet(ModelViewSet):
+    queryset = Support.objects.all()
+    serializer_class = SupportSerializer
 """
 ############################################################################           остатки от работы с фронтом
 def index(request):

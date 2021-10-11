@@ -17,14 +17,16 @@ from django.contrib import admin
 from django.urls import path, include
 
 from rest_framework.routers import SimpleRouter
-from main.views import UserViewSet
+from main.views import UserViewSet, SupportViewSet, UserCreateView, SupportCreateView
 
 router = SimpleRouter()
-router.register('api/support', UserViewSet)
+router.register('api/user', UserViewSet)                          #/api/user/?format=json
+router.register('api/support', SupportViewSet)                    #/api/support/?format=json
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #path('', include('main.urls'))            #остаток от работы с фронтом
+    path('create_user', UserCreateView.as_view()),
+    path('create_support', SupportCreateView.as_view())
 ]
 
 urlpatterns += router.urls
